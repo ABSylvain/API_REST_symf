@@ -33,6 +33,9 @@ class DefaultController extends Controller
         $products = $this->get('doctrine.orm.entity_manager')
                     ->getRepository('AppBundle:Product')
                     ->findAll();
+        if (empty($products)) {
+            return new JsonResponse(['message' => 'Products not found'], Response::HTTP_NOT_FOUND);
+        }
         $formatted = [];
         foreach($products as $product){
             $formatted[]= [
@@ -56,6 +59,9 @@ class DefaultController extends Controller
         $product = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Product')
                 ->find($id);
+        if (empty($product)) {
+            return new JsonResponse(['message' => 'Place not found'], Response::HTTP_NOT_FOUND);
+        }
         $formatted = [];
         $formatted[]= [
             'ref' => $product->getReference(),
@@ -77,7 +83,9 @@ class DefaultController extends Controller
         $products = $this->get('doctrine.orm.entity_manager')
                     ->getRepository('AppBundle:Product')
                     ->find(array('description' => $desc));
-
+        if (empty($products)) {
+            return new JsonResponse(['message' => 'Place not found'], Response::HTTP_NOT_FOUND);
+        }
         $formatted = [];
         foreach($products as $product){
             $formatted[]= [
@@ -144,7 +152,9 @@ class DefaultController extends Controller
         $user = $this->get('doctrine.orm.entity_manager')
                 ->getRepository('AppBundle:Users')
                 ->find($id);
-
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
         $formatted = [];
             $formatted[] = [
             'id' => $user->getId(),
@@ -172,7 +182,9 @@ class DefaultController extends Controller
         $user = $this->get('doctrine.orm.entity_manager')
                     ->getRepository('AppBundle:Users')
                     ->find($id);
-
+        if (empty($user)) {
+            return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
+        }
         $formatted = [];
             $formatted[] = [
             'id' => $user->getId(),
