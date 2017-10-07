@@ -248,5 +248,10 @@ class Product
     {
         return $this->note;
     }
+    /**
+    * @ORM\ManyToOne(targetEntity="Category", inversedBy="articles")
+    * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+    */
+    private $ordi;
 }
 

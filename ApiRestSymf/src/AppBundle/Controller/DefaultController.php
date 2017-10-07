@@ -22,7 +22,7 @@ class DefaultController extends Controller
     */
     public function indexAction(Request $request)
     {
-        
+       
     }
     /**
     * @Route("/products", name="allProduct")
@@ -156,6 +156,7 @@ class DefaultController extends Controller
             return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
         $formatted = [];
+        foreach($users as $user){
             $formatted[] = [
             'id' => $user->getId(),
             'name' => $user->getName(),
@@ -171,6 +172,7 @@ class DefaultController extends Controller
             'email' => $user->getEmail(),
             'role' => $user->getRole()
             ];
+        }
         return new JsonResponse($formatted);
     }
     /**
@@ -186,7 +188,7 @@ class DefaultController extends Controller
             return new JsonResponse(['message' => 'User not found'], Response::HTTP_NOT_FOUND);
         }
         $formatted = [];
-            $formatted[] = [
+        $formatted[] = [
             'id' => $user->getId(),
             'name' => $user->getName(),
             'firstname' => $user->getFirstname(),
@@ -200,7 +202,7 @@ class DefaultController extends Controller
             'pseudo' => $user->getPseudo(),
             'email' => $user->getEmail(),
             'role' => $user->getRole()
-            ];
+        ];
         return new JsonResponse($formatted);
     }
     /**
